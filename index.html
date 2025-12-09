@@ -1,201 +1,591 @@
-import React, { useState } from 'react';
-import { Menu, X, Mail, Phone, MapPin, Github, Linkedin, Code, Database, Server, Shield, Wifi, GraduationCap, Award, Briefcase } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.S.Yogalakshmi - Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-export default function Portfolio() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #581c87 50%, #0f172a 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
 
-  const skills = [
-    { name: 'Python', icon: Code, color: 'bg-blue-500' },
-    { name: 'Flask', icon: Server, color: 'bg-green-500' },
-    { name: 'SQL', icon: Database, color: 'bg-purple-500' },
-    { name: 'Cybersecurity', icon: Shield, color: 'bg-red-500' },
-    { name: 'IoT', icon: Wifi, color: 'bg-teal-500' }
-  ];
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Navigation */}
-      <nav className="fixed w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-purple-500/20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              SSY
-            </div>
-            
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              <a href="#home" className="text-gray-300 hover:text-purple-400 transition">Home</a>
-              <a href="#about" className="text-gray-300 hover:text-purple-400 transition">About</a>
-              <a href="#skills" className="text-gray-300 hover:text-purple-400 transition">Skills</a>
-              <a href="#contact" className="text-gray-300 hover:text-purple-400 transition">Contact</a>
-            </div>
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
 
-            {/* Mobile Menu Button */}
-            <button 
-              className="md:hidden text-gray-300"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(to right, #c084fc, #f9a8d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #c084fc;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #d1d5db;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: #0f172a;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            padding: 20px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: #d1d5db;
+            text-decoration: none;
+            padding: 12px 0;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: #c084fc;
+        }
+
+        .hero {
+            padding: 150px 20px 80px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 32px;
+        }
+
+        .avatar {
+            width: 160px;
+            height: 160px;
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            font-weight: bold;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.4);
+        }
+
+        .avatar-badge {
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            width: 48px;
+            height: 48px;
+            background: #10b981;
+            border-radius: 50%;
+            border: 4px solid #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #c084fc, #f9a8d4, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: #d1d5db;
+            margin-bottom: 16px;
+        }
+
+        .hero .description {
+            font-size: 18px;
+            color: #9ca3af;
+            max-width: 800px;
+            margin: 0 auto 32px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 12px 32px;
+            background: linear-gradient(to right, #a855f7, #ec4899);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.5);
+        }
+
+        .btn-secondary {
+            padding: 12px 32px;
+            background: #1e293b;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 1px solid rgba(168, 85, 247, 0.5);
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #334155;
+            transform: scale(1.05);
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-alt {
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .section-title {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 48px;
+            background: linear-gradient(to right, #c084fc, #f9a8d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .about-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .about-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .about-card-header i {
+            margin-right: 12px;
+            color: #c084fc;
+        }
+
+        .about-card h3 {
+            font-size: 24px;
+        }
+
+        .about-card p {
+            color: #d1d5db;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .specialization {
+            color: #c084fc;
+            font-weight: 600;
+        }
+
+        .focus-list {
+            list-style: none;
+        }
+
+        .focus-list li {
+            display: flex;
+            align-items: center;
+            color: #d1d5db;
+            margin-bottom: 12px;
+        }
+
+        .focus-list i {
+            margin-right: 8px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-card {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+        }
+
+        .skill-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-icon.blue { background: #3b82f6; }
+        .skill-icon.green { background: #10b981; }
+        .skill-icon.purple { background: #a855f7; }
+        .skill-icon.red { background: #ef4444; }
+        .skill-icon.teal { background: #14b8a6; }
+
+        .skill-card h3 {
+            font-size: 20px;
+        }
+
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-box {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .contact-description {
+            color: #d1d5db;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #d1d5db;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: #0f172a;
+            transform: translateY(-5px);
+        }
+
+        .contact-item i {
+            color: #c084fc;
+            margin-bottom: 12px;
+            transition: transform 0.3s;
+        }
+
+        .contact-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .contact-item span {
+            font-size: 14px;
+        }
+
+        footer {
+            padding: 32px 20px;
+            border-top: 1px solid rgba(168, 85, 247, 0.2);
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero .subtitle {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">SSY</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">
+                <i data-lucide="menu" width="24" height="24"></i>
             </button>
-          </div>
         </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#skills" onclick="toggleMenu()">Skills</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
+        </div>
+    </nav>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-slate-900 border-t border-purple-500/20">
-            <div className="px-4 py-4 space-y-3">
-              <a href="#home" className="block text-gray-300 hover:text-purple-400 transition">Home</a>
-              <a href="#about" className="block text-gray-300 hover:text-purple-400 transition">About</a>
-              <a href="#skills" className="block text-gray-300 hover:text-purple-400 transition">Skills</a>
-              <a href="#contact" className="block text-gray-300 hover:text-purple-400 transition">Contact</a>
+    <section id="home" class="hero">
+        <div class="avatar-container">
+            <div class="avatar">SY</div>
+            <div class="avatar-badge">
+                <i data-lucide="shield" width="20" height="20"></i>
             </div>
-          </div>
-        )}
-      </nav>
-
-      {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8 relative inline-block">
-            <div className="w-40 h-40 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-6xl font-bold text-white shadow-2xl">
-              SY
-            </div>
-            <div className="absolute -bottom-2 -right-2 w-12 h-12 bg-green-500 rounded-full border-4 border-slate-900 flex items-center justify-center">
-              <Shield className="text-white" size={20} />
-            </div>
-          </div>
-          
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              S.S.Yogalakshmi
-            </span>
-          </h1>
-          
-          <p className="text-xl sm:text-2xl text-gray-300 mb-4">
-            Cybersecurity & IoT Developer
-          </p>
-          
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+        </div>
+        
+        <h1>S.S.Yogalakshmi</h1>
+        
+        <p class="subtitle">Cybersecurity & IoT Developer</p>
+        
+        <p class="description">
             B.Tech in Computer Science Engineering specializing in Cybersecurity and Internet of Things
-          </p>
+        </p>
 
-          <div className="flex justify-center gap-4 flex-wrap">
-            <a href="#contact" className="px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition transform hover:scale-105">
-              Get In Touch
-            </a>
-            <a href="#skills" className="px-8 py-3 bg-slate-800 text-white rounded-full font-semibold border border-purple-500/50 hover:bg-slate-700 transition transform hover:scale-105">
-              View Skills
-            </a>
-          </div>
+        <div class="btn-container">
+            <a href="#contact" class="btn-primary">Get In Touch</a>
+            <a href="#skills" class="btn-secondary">View Skills</a>
         </div>
-      </section>
+    </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-slate-800/50 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition">
-              <div className="flex items-center mb-4">
-                <GraduationCap className="text-purple-400 mr-3" size={32} />
-                <h3 className="text-2xl font-bold text-white">Education</h3>
-              </div>
-              <p className="text-gray-300 text-lg">
-                Bachelor of Technology in Computer Science Engineering
-              </p>
-              <p className="text-purple-400 font-semibold mt-2">
-                Specialization: Cybersecurity and IoT
-              </p>
-            </div>
-
-            <div className="bg-slate-800/50 p-8 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition">
-              <div className="flex items-center mb-4">
-                <Award className="text-pink-400 mr-3" size={32} />
-                <h3 className="text-2xl font-bold text-white">Focus Areas</h3>
-              </div>
-              <ul className="text-gray-300 space-y-2">
-                <li className="flex items-center">
-                  <Shield className="text-red-400 mr-2" size={20} />
-                  Cybersecurity Solutions
-                </li>
-                <li className="flex items-center">
-                  <Wifi className="text-teal-400 mr-2" size={20} />
-                  IoT Development
-                </li>
-                <li className="flex items-center">
-                  <Code className="text-blue-400 mr-2" size={20} />
-                  Backend Development
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Technical Skills
-          </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill, index) => (
-              <div 
-                key={index}
-                className="bg-slate-800/50 p-6 rounded-2xl border border-purple-500/20 hover:border-purple-500/50 transition transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20"
-              >
-                <div className={`${skill.color} w-16 h-16 rounded-xl flex items-center justify-center mb-4 shadow-lg`}>
-                  <skill.icon className="text-white" size={32} />
+    <section id="about" class="section-alt">
+        <h2 class="section-title">About Me</h2>
+        
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-card-header">
+                    <i data-lucide="graduation-cap" width="32" height="32"></i>
+                    <h3>Education</h3>
                 </div>
-                <h3 className="text-xl font-bold text-white">{skill.name}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Get In Touch
-          </h2>
-          
-          <div className="bg-slate-800/50 p-8 rounded-2xl border border-purple-500/20">
-            <p className="text-gray-300 text-center mb-8 text-lg">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <a href="mailto:yogalakshmi@example.com" className="flex flex-col items-center p-6 bg-slate-900/50 rounded-xl hover:bg-slate-900 transition group">
-                <Mail className="text-purple-400 mb-3 group-hover:scale-110 transition" size={32} />
-                <span className="text-gray-300 text-sm">Email Me</span>
-              </a>
-              
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center p-6 bg-slate-900/50 rounded-xl hover:bg-slate-900 transition group">
-                <Github className="text-purple-400 mb-3 group-hover:scale-110 transition" size={32} />
-                <span className="text-gray-300 text-sm">GitHub</span>
-              </a>
-              
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center p-6 bg-slate-900/50 rounded-xl hover:bg-slate-900 transition group">
-                <Linkedin className="text-purple-400 mb-3 group-hover:scale-110 transition" size={32} />
-                <span className="text-gray-300 text-sm">LinkedIn</span>
-              </a>
+                <p>Bachelor of Technology in Computer Science Engineering</p>
+                <p class="specialization">Specialization: Cybersecurity and IoT</p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-4 border-t border-purple-500/20">
-        <div className="max-w-6xl mx-auto text-center text-gray-400">
-          <p>&copy; 2024 S.S.Yogalakshmi. All rights reserved.</p>
+            <div class="about-card">
+                <div class="about-card-header">
+                    <i data-lucide="award" width="32" height="32" style="color: #f9a8d4;"></i>
+                    <h3>Focus Areas</h3>
+                </div>
+                <ul class="focus-list">
+                    <li>
+                        <i data-lucide="shield" width="20" height="20" style="color: #ef4444;"></i>
+                        Cybersecurity Solutions
+                    </li>
+                    <li>
+                        <i data-lucide="wifi" width="20" height="20" style="color: #14b8a6;"></i>
+                        IoT Development
+                    </li>
+                    <li>
+                        <i data-lucide="code" width="20" height="20" style="color: #3b82f6;"></i>
+                        Backend Development
+                    </li>
+                </ul>
+            </div>
         </div>
-      </footer>
-    </div>
-  );
-}
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon blue">
+                    <i data-lucide="code" width="32" height="32"></i>
+                </div>
+                <h3>Python</h3>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon green">
+                    <i data-lucide="server" width="32" height="32"></i>
+                </div>
+                <h3>Flask</h3>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon purple">
+                    <i data-lucide="database" width="32" height="32"></i>
+                </div>
+                <h3>SQL</h3>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon red">
+                    <i data-lucide="shield" width="32" height="32"></i>
+                </div>
+                <h3>Cybersecurity</h3>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon teal">
+                    <i data-lucide="wifi" width="32" height="32"></i>
+                </div>
+                <h3>IoT</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-alt">
+        <h2 class="section-title">Get In Touch</h2>
+        
+        <div class="contact-container">
+            <div class="contact-box">
+                <p class="contact-description">
+                    I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                </p>
+                
+                <div class="contact-grid">
+                    <a href="mailto:yogalakshmi@example.com" class="contact-item">
+                        <i data-lucide="mail" width="32" height="32"></i>
+                        <span>Email Me</span>
+                    </a>
+                    
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-item">
+                        <i data-lucide="github" width="32" height="32"></i>
+                        <span>GitHub</span>
+                    </a>
+                    
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-item">
+                        <i data-lucide="linkedin" width="32" height="32"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 S.S.Yogalakshmi. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleMenu() {
+            var menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var links = document.querySelectorAll('a[href^="#"]');
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var href = this.getAttribute('href');
+                    var target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
